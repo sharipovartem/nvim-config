@@ -6,12 +6,12 @@
 local M = {}
 
 M.base46 = {
-	theme = "github_dark",
-
-	-- hl_override = {
-	-- 	Comment = { italic = true },
-	-- 	["@comment"] = { italic = true },
-	-- },
+  theme = "jellybeans",
+	transparency = true,  -- Add this line for transparency
+	hl_override = {
+		Comment = { italic = true },
+		["@comment"] = { italic = true },
+	},
 }
 
 -- M.nvdash = { load_on_startup = true }
