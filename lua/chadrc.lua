@@ -6,7 +6,7 @@
 local M = {}
 
 M.base46 = {
-  theme = "jellybeans",
+  theme = "material-deep-ocean",
 	transparency = true,  -- Add this line for transparency
 	hl_override = {
 		Comment = { italic = true },

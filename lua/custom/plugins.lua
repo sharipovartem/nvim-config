@@ -40,7 +40,7 @@ return {
         goimports = "gopls",  -- Use gopls for imports
         gofmt = "gofumpt",   -- Use gofumpt for better formatting
         lsp_keymaps = false, -- Disable default LSP keymaps
-        lsp_document_formatting = true,
+        lsp_document_formatting = true, -- Enable automatic formatting on save
         lsp_inlay_hints = { enable = true },
         run_in_floaterm = true,
         diagnostic = true,
@@ -71,7 +71,25 @@ return {
       "nvim-treesitter/nvim-treesitter",
     },
   },
-
+  -- remote-nvim (Remote development)
+  {
+    "amitds1997/remote-nvim.nvim",
+    version = "*",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      "nvim-telescope/telescope.nvim",
+  },
+    lazy = false,  -- Don't lazy load
+    priority = 1000,  -- Load early
+    config = function()
+      require("remote-nvim").setup()
+      -- Force command registration
+      vim.api.nvim_create_user_command("RemoteStart", function()
+        require("remote-nvim").start()
+      end, {})
+    end,
+  },
   -- swenv.nvim (Python virtualenv switcher)
   {
     "AckslD/swenv.nvim",
@@ -82,13 +100,24 @@ return {
       })
     end,
   },
-
   -- nvim-dap-python (Python debugging)
   {
     "mfussenegger/nvim-dap-python",
     ft = "python",
     config = function()
       require("dap-python").setup("~/.virtualenvs/debugpy/bin/python")  -- Path to debugpy
+    end,
+  },
+  {
+   "amitds1997/remote-nvim.nvim",
+   version = "*", -- Pin to GitHub releases
+   dependencies = {
+       "nvim-lua/plenary.nvim", -- For standard functions
+       "MunifTanjim/nui.nvim", -- To build the plugin UI
+       "nvim-telescope/telescope.nvim", -- For picking b/w different remote methods
+   },
+   config = function ()
+     require("remote-nvim").setup()
     end,
   },
 
